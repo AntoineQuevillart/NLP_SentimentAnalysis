@@ -38,5 +38,5 @@ for s in range(len(reviews)):
 
 tokenized_reviews = np.array(tokenized_reviews, dtype = object)
 
-# Save tokenized_reviews as np array
+# Save tokenized_reviews as numpy array
 np.save('C:/dataset/tokenized_reviews', tokenized_reviews)
