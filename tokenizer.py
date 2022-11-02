@@ -1,17 +1,15 @@
-import pickle
+import numpy as np
 import pandas as pd
 from cleaning import clean_review
+from keras_preprocessing.sequence import pad_sequences
 from gensim.models import Doc2Vec
 
 # Reading the dataset
 path = 'C:/dataset/video_game.xlsx'
 data = pd.read_excel(path)
-data = data.head(50000)
 data = data.dropna()
+data = data.head(50000)
 data = data.loc[data['reviewText']!=0,:]
-
-# We only need the reviews column
-reviews = data['reviewText'].values
 
 # Length of the array
 print('There are total {} reviews in the dataset'.format(len(reviews)))
@@ -19,19 +17,26 @@ print('There are total {} reviews in the dataset'.format(len(reviews)))
 # Apply the cleaning function
 data['reviewText'] = data['reviewText'].apply(clean_review)
 
-#10h49
+# We only need the reviews column
+reviews = data['reviewText'].values
 
-# Saving memory
-del reviews
-del data
+# Tokenize words function
+def tokenize_text(text):
+    tokens = []
+    for sent in nltk.sent_tokenize(text):
+        for word in nltk.word_tokenize(sent):
+            if len(word) < 2:
+                continue
+            tokens.append(word.lower())
+    return tokens
 
-# Saving the cleaned data
-with open('C:/dataset/clean_data.xlsx', 'wb') as handle:
-    pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+tokenized_reviews = []
+for s in range(len(reviews)):
+    tokenized_reviews.append(tokenize_text(reviews[s]))
+    if s % 1000 == 0:
+        print('--Processing {}th review--'.format(s))
 
-import xlrd
-reviews.to_excel('C:/dataset/reviews.xlsx', sheet_name='reviews')
+tokenized_reviews = np.array(tokenized_reviews, dtype = object)
 
-from google.colab import files
-df.to_csv('output.csv', encoding 'utf-8-sig')
-files.download('output.csv')
+# Save tokenized_reviews as np array
+np.save('C:/dataset/tokenized_reviews', tokenized_reviews)
