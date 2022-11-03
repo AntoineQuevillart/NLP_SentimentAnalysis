@@ -56,11 +56,4 @@ def clean_review(review):
         r'''(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))''',
         '', review, flags=re.MULTILINE)
 
-    lemmatizer = WordNetLemmatizer()
-    lemmatized_review = []
-    for word in review:
-            w = lemmatizer.lemmatize(word)
-        lemmatized_review.append(w)
-
-    return lemmatized_review
     return review
