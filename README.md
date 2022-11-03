@@ -49,8 +49,10 @@ In this step, we compare several models such as Logistic Regression, KNN or RNN.
 
 ## Structure
 
-Each files on this repository correspond to a step. `cleaning` folder contains the preprocess function to clean data. `tokenizer` file contains the function to split 
-sentences into lists of words. `vectorization` file contains the function to convert the train and test data into vectors of length 150. `models` file contains
-the differents models tested. 
+Each files on this repository correspond to a step. The folder `tools` contains the following files : 
+- `cleaning` - preprocess function to clean data. 
+- `tokenizer` - function to split sentences into lists of words. 
+- `vectorization` - function to convert the train and test data into vectors of length 150. 
+- `models` - differents models tested. 
 
 :soon: A last file will be uploaded to do prediction with a selected model.
