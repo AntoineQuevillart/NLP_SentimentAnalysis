@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 from cleaning import clean_review
-from keras_preprocessing.sequence import pad_sequences
-from gensim.models import Doc2Vec
 
 # Reading the dataset
 path = 'C:/dataset/video_game.xlsx'
@@ -12,7 +10,7 @@ data = data.head(50000)
 data = data.loc[data['reviewText']!=0,:]
 
 # Length of the array
-print('There are total {} reviews in the dataset'.format(len(reviews)))
+print('There are total {} reviews in the dataset'.format(len(data['reviewText'])))
 
 # Apply the cleaning function
 data['reviewText'] = data['reviewText'].apply(clean_review)
@@ -38,5 +36,9 @@ for s in range(len(reviews)):
 
 tokenized_reviews = np.array(tokenized_reviews, dtype = object)
 
-# Save tokenized_reviews as numpy array
-np.save('C:/dataset/tokenized_reviews', tokenized_reviews)
+# Associate review with note
+df = pd.DataFrame(reviews, data["overall"])
+
+# Save tokenized reviews
+df.to_pickle('C:/dataset/tokenized_reviews')
+
