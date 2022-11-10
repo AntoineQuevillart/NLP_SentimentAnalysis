@@ -1,10 +1,4 @@
 import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import wordnet
-
 
 def clean_review(review):
     review = review.lower()
