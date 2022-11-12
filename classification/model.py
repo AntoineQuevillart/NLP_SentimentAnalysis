@@ -3,7 +3,6 @@ import joblib
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
-from sentence_transformers import SentenceTransformer
 
 # Load pickle encoded dataset
 filename = "C:/dataset/encoded_dataset.pkl"
@@ -24,8 +23,8 @@ y_test = test[:,0]
 y_train = y_train.astype('int')
 y_test = y_test.astype('int')
 
-# SVM model
-clf_svm = svm.SVC()
+# SVM model - 5 fold cross validation
+clf_svm = svm.SVC(probability=True)
 clf_svm.fit(X_train, y_train)
 
 # Prediction
@@ -33,7 +32,7 @@ y_pred = clf_svm.predict(X_test)
 
 # Model Accuracy: how often is the classifier correct?
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-# 78% accuracy
+# 78,8% accuracy
 
 # Save the SVM classifier with joblib
 filename = "C:/model/svm_classifier.joblib"
