@@ -19,6 +19,7 @@ def clean_review(review):
 
     review = re.sub(r"i'm", "i am", review)
     review = re.sub(r"aren't", "are not", review)
+    review = re.sub(r"can't", "can not", review)
     review = re.sub(r"couldn't", "counld not", review)
     review = re.sub(r"didn't", "did not", review)
     review = re.sub(r"doesn't", "does not", review)
