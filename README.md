@@ -36,7 +36,10 @@ Transformers automate word tokenization. It consists to divide strings into list
 
 ### Step 3 : ML Model
 
-In this step, we compare traditionnal ML models such as SVM, then we will implement Neural Network. The best model will be used for prediction over new reviews.
+SVM model is used for classification. We implement this model with an accuracy score of ~80%. 
+SVM classifier from [scikit learn](https://scikit-learn.org/stable/modules/svm.html) is effective in high dimensional
+spaces. We use the five-fold cross-validation argument to provide probabilities on class belonging.
+
 
 ## Structure
 
