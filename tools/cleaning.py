@@ -1,54 +1,48 @@
 import re
+from nltk.corpus import stopwords
 
-def clean_review(review):
-    review = review.lower()
-    review = review.replace('\n', ' ').replace('\r', '')
-    review = re.sub(r"[A-Za-z\.]*[0-9]+[A-Za-z%°\.]*", "", review)
-    review = re.sub(r"(\s\-\s|-$)", "", review)
-    review = re.sub(r"[,\!\?\%\(\)\/\"]", "", review)
-    review = re.sub(r"\&\S*\s", "", review)
-    review = re.sub(r"\&", "", review)
-    review = re.sub(r"\+", "", review)
-    review = re.sub(r"\#", "", review)
-    review = re.sub(r"\$", "", review)
-    review = re.sub(r"\£", "", review)
-    review = re.sub(r"\%", "", review)
-    review = re.sub(r"\:", "", review)
-    review = re.sub(r"\@", "", review)
-    review = re.sub(r"\-", "", review)
+def clean_review(text):
+    """
+    Renvoie une phrase propre prête à l'encodage.
+    C'est-à-dire sans majuscule, sans caractère special, sans chiffre, sans ponctuation mise à part le point et sans les stopwords.
 
-    review = re.sub(r"i'm", "i am", review)
-    review = re.sub(r"aren't", "are not", review)
-    review = re.sub(r"can't", "can not", review)
-    review = re.sub(r"couldn't", "counld not", review)
-    review = re.sub(r"didn't", "did not", review)
-    review = re.sub(r"doesn't", "does not", review)
-    review = re.sub(r"don't", "do not", review)
-    review = re.sub(r"hadn't", "had not", review)
-    review = re.sub(r"hasn't", "has not", review)
-    review = re.sub(r"haven't", "have not", review)
-    review = re.sub(r"isn't", "is not", review)
-    review = re.sub(r"it't", "had not", review)
-    review = re.sub(r"hadn't", "had not", review)
-    review = re.sub(r"won't", "will not", review)
-    review = re.sub(r"can't", "cannot", review)
-    review = re.sub(r"mightn't", "might not", review)
-    review = re.sub(r"mustn't", "must not", review)
-    review = re.sub(r"needn't", "need not", review)
-    review = re.sub(r"shouldn't", "should not", review)
-    review = re.sub(r"wasn't", "was not", review)
-    review = re.sub(r"weren't", "were not", review)
-    review = re.sub(r"won't", "will not", review)
-    review = re.sub(r"wouldn't", "would not", review)
+    :param text: string
+                Un texte demandé
+    :return: string
+                Une chaine de caractère sans majuscule, sans caractère special, sans chiffre, sans les stopwords
 
-    review = re.sub(r"\'s", " is", review)
-    review = re.sub(r"\'ll", " will", review)
-    review = re.sub(r"\'ve", " have", review)
-    review = re.sub(r"\'re", " are", review)
-    review = re.sub(r"\'d", " would", review)
+    Exemple:
+        Entrée : clean_review("I love it this game. I only play that since my purchase in 2012, i'm statisfied !")
+        Sortie : "love game. play since purchase i'm statisfied "
 
-    review = re.sub(
-        r'''(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))''',
-        '', review, flags=re.MULTILINE)
+        Entrée : corpus=["I love it this game.", "I only play that since my purchase in 2012, i'm statisfied "]
+                corpus.apply(clean_review)
+        Sortie :["love game.", "play since purchase i'm statisfied "]
+    """
 
-    return review
+    text = text.lower()
+    text = text.replace('\n', ' ').replace('\r', '')
+    text = ' '.join(text.split())
+    text = re.sub(r"[A-Za-z\.]*[0-9]+[A-Za-z%°\.]*", "", text)
+    text = re.sub(r"(\s\-\s|-$)", "", text)
+    text = re.sub(r"[,\!\?\%\(\)\/\"]", "", text)
+    text = re.sub(r"\&\S*\s", "", text)
+    text = re.sub(r"\&", "", text)
+    text = re.sub(r"\+", "", text)
+    text = re.sub(r"\#", "", text)
+    text = re.sub(r"\$", "", text)
+    text = re.sub(r"\£", "", text)
+    text = re.sub(r"\%", "", text)
+    text = re.sub(r"\:", "", text)
+    text = re.sub(r"\@", "", text)
+    text = re.sub(r"\-", "", text)
+
+    stopwords_dict = {word: 1 for word in stopwords.words("english")}
+    new = ""
+    for word in text.split():
+        if word not in stopwords_dict:
+            new += word
+            new += " "
+    text = new
+
+    return text

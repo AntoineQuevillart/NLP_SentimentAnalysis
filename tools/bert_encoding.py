@@ -4,7 +4,6 @@ import numpy as np
 from tools.cleaning import clean_review
 from sentence_transformers import SentenceTransformer
 
-
 # Reading the dataset
 path = 'C:/dataset/video_game.xlsx'
 dataset = pd.read_excel(path)
@@ -17,11 +16,11 @@ df2 = dataset.loc[dataset['overall']==4].sample(13661)
 df3 =dataset.loc[dataset['overall']==3].sample(13661)
 df4 =dataset.loc[dataset['overall']==1].sample(13661)
 df5 = dataset.loc[dataset['overall']==2]
-dataset = pd.concat([df1,df2,df3,df4,df5], axis=0)
+dataset = pd.concat([df1,df2,df4,df5], axis=0) # Remove df3
 dataset = dataset.reset_index(drop=True)
 
 # Clean up memory
-del df1, df2, df3, df4, df5
+del df1, df2, df4, df5
 
 # Apply cleaning function over train/test reviews
 dataset['reviewText'] = dataset['reviewText'].apply(clean_review)
