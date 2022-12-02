@@ -43,8 +43,23 @@ spaces. We use the five-fold cross-validation argument to provide probabilities 
 
 ## Structure
 
-Each files on this repository correspond to a step. The folder `tools` contains the following files : 
+Each files on this repository correspond to a step. 
+The folder `tools` contains the following files : 
 - `cleaning` - preprocess function to clean data. 
-- `bert_encoding` - encoding text data to numeric data with sbert.
+- `encoding` - encoding text data to numeric data with Transformers.
+- `var_selection` - apply a variables selection algorithm.
+
+The folder `classification` contains the following files :
 - `model` - train a classifier and evaluate it. 
 - `predict` - prediction function. 
+
+The folder `deployment` contains the following file :
+- `application.xlsm` - the file containing our application, please click the launch button.
+- `output_model.xls` - file needed to stock model results, do not need to be open in your machine.
+- `scoring_model.pkl` - pickle file containing the scoring model.
+- `select_vaiable.pkl` - pickle file containing the selection of variables needed.
+Read help.txt for more informations.
+
+The folder `test` contains the following file :
+- `test_` - test functions. 
+
