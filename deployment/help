@@ -1,0 +1,13 @@
+In this folder, you will find all the files needed to deploy the application.
+
+application.xlsm : user interface
+
+output.xlsm : file getting the output of the algorithm
+
+scoring_model.pkl : classifier in a pickle file
+
+select_variable.pkl : select number of variables needed to run the algorithm
+
+!!! PLEASE MAKE SURE YOU HAVE THE CORRECT PATH !!!
+
+For information, please contact antoinequevillart@gmail.com
