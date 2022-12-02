@@ -63,3 +63,4 @@ Read help.txt for more informations.
 The folder `test` contains the following file :
 - `test_` - test functions. 
 
+# Before to run application, please make sure you use the correct path for Excel and Python files. 
