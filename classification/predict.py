@@ -25,7 +25,7 @@ def predict():
         Sortie: 0.9
     """
 
-    review = pd.read_excel(r"C:/Users/antoi/Documents/python_vba.xlsm", sheet_name="Input")
+    review = pd.read_excel(r"C:/Users/antoi/Documents/application_scoring/application.xlsm", sheet_name="Input")
 
     review = str(review.dtypes)
 
@@ -45,7 +45,7 @@ def predict():
 
     output = round(output, 2)
 
-    output.to_excel(r"C:/Users/antoi/Documents/output_model.xls", sheet_name='Output', index=False)
+    output.to_excel(r"C:/Users/antoi/Documents/application_scoring/output_model.xls", sheet_name='Output', index=False)
 
 if __name__ == '__main__':
     while True:
